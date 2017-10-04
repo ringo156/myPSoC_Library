@@ -25,6 +25,7 @@ void I2CReadBytes(uint8_t devAddr, uint8_t regAddr, uint8_t length, uint8_t *val
 	}
 	*value = I2C_MasterReadByte(I2C_NAK_DATA);
 	I2C_MasterSendStop();
+    I2C_MasterClearStatus();
 }
 
 void I2CReadByte(uint8_t devAddr, uint8_t regAddr, uint8_t *value) {

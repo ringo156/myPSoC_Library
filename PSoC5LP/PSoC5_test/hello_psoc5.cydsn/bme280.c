@@ -88,11 +88,13 @@ uint8 bme280_ReadReg(uint8 reg)
     //Step1
     I2C_MasterWriteBuf(_i2caddr,(uint8 *)Write_Buf,1,I2C_MODE_NO_STOP);
     while((I2C_MasterStatus() & I2C_MSTAT_WR_CMPLT)==0){}
+    I2C_MasterClearStatus();
     
     //Step2
     I2C_MasterReadBuf(_i2caddr,(uint8 *)Read_Buf,1,I2C_MODE_REPEAT_START);
     while((I2C_MasterStatus() & I2C_MSTAT_RD_CMPLT)==0){}
-    
+    I2C_MasterClearStatus();
+    I2C_MasterClearReadBuf();
     return Read_Buf[0];
 }
 
